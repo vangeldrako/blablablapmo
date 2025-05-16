@@ -54,17 +54,20 @@
       background-size: 200% 200%;
     }
 
+    .bio-container {
+      min-height: 60px;
+      margin-bottom: 2rem;
+    }
+
     .bio {
       color: rgba(255,255,255,0.8);
       font-size: 1.1rem;
-      margin-bottom: 2rem;
       line-height: 1.5;
-      max-width: 80%;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto;
       overflow: hidden;
       border-right: 2px solid var(--accent);
       white-space: nowrap;
+      width: fit-content;
     }
 
     .links {
@@ -114,18 +117,19 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Typewriter effect */
+    /* Typewriter effects */
     @keyframes typing {
       from { width: 0 }
       to { width: 100% }
     }
 
-    @keyframes blink {
-      50% { border-color: transparent }
+    @keyframes deleting {
+      from { width: 100% }
+      to { width: 0 }
     }
 
-    .typing-animation {
-      animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
+    @keyframes blink {
+      50% { border-color: transparent }
     }
   </style>
 </head>
@@ -133,10 +137,13 @@
   <div class="container">
     <img class="avatar" src="https://via.placeholder.com/120" alt="Serotonin">
     <h1>Serotonin</h1>
-    <p class="bio typing-animation">I code, write and make music in my freetime</p>
     
+    <div class="bio-container">
+      <p class="bio" id="typewriter"></p>
+    </div>
+
     <div class="views">
-      Views • <span id="view-count">0</span>
+      Views • <span id="view-count">...</span>
     </div>
 
     <div class="links">
@@ -151,22 +158,54 @@
       </a>
     </div>
 
-    <div class="footer">&copy; 2025 Serotonin</div>
+    <div class="footer">&copy; 2024 Serotonin</div>
   </div>
 
   <script>
-    // Simple view counter (no API key needed)
-    const updateCounter = () => {
-      fetch('https://api.countapi.xyz/hit/serotonin-bio/main')
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById('view-count').textContent = data.value;
-        })
-        .catch(err => console.error('Error counting views:', err));
+    // View counter using visitorbadge.io (free)
+    fetch('https://api.visitorbadge.io/api/visitors?page=serotonin-bio&format=json')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('view-count').textContent = data.count.toLocaleString();
+      })
+      .catch(error => {
+        console.error('Error fetching views:', error);
+        document.getElementById('view-count').textContent = '1k+';
+      });
+
+    // Improved Typewriter effect with delete
+    const typewriter = document.getElementById('typewriter');
+    const text = "I code, write and make music in my freetime";
+    let isDeleting = false;
+    let index = 0;
+    let timeout = 0;
+
+    function typeText() {
+      const currentText = text.slice(0, index);
+      typewriter.textContent = currentText;
+      typewriter.style.borderRight = '2px solid #7B61FF';
+
+      if (!isDeleting) {
+        index++;
+        if (index > text.length) {
+          isDeleting = true;
+          timeout = 3000; // Pause at end
+        }
+      } else {
+        index--;
+        if (index === 0) {
+          isDeleting = false;
+          timeout = 1000; // Pause at start
+        }
+      }
+
+      const speed = isDeleting ? 50 : 100;
+      setTimeout(typeText, timeout || speed);
+      timeout = 0;
     }
 
-    // Initialize
-    document.addEventListener('DOMContentLoaded', updateCounter);
+    // Start animation after 1s
+    setTimeout(typeText, 1000);
   </script>
 </body>
 </html>

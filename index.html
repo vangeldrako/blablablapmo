@@ -227,35 +227,19 @@
   </div>
 
   <script>
-    // Realistic view counter with localStorage
+    // View counter using external API
     const viewsElement = document.getElementById('views');
     
-    // Initialize view count
-    let views = localStorage.getItem('pageViews') || 0;
-    views = parseInt(views) + 1;
-    localStorage.setItem('pageViews', views);
-    
-    // Animate counter
-    let currentDisplay = 0;
-    const duration = 3000;
-    const startTime = Date.now();
-    
-    const updateCounter = () => {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      currentDisplay = Math.floor(progress * views);
-      viewsElement.textContent = currentDisplay;
-      
-      if (progress < 1) {
-        requestAnimationFrame(updateCounter);
-      } else {
-        viewsElement.textContent = views.toLocaleString();
-      }
-    }
-    
-    requestAnimationFrame(updateCounter);
+    fetch('https://abacus.jasoncameron.dev/hit/frongongongongong-dopamine.gay/views')
+      .then(res => res.json())
+      .then(data => {
+        viewsElement.textContent = data.value.toLocaleString();
+      })
+      .catch(() => {
+        viewsElement.textContent = '7 maybe 7.2'; // Fallback to original value
+      });
 
-    // Hover effect for cards
+    // Rest of the original hover effect code
     document.querySelectorAll('.link-card').forEach(link => {
       link.addEventListener('mousemove', (e) => {
         const rect = link.getBoundingClientRect();
@@ -265,6 +249,6 @@
         link.style.setProperty('--y', `${y}px`);
       });
     });
-  </script>
+</script>
 </body>
 </html>

@@ -1,90 +1,129 @@
 <!DOCTYPE html><html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Your Name • Bio Link</title>
-    <style>
-      /* Reset & base */
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body, html {
-        width: 100%; height: 100%;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        background: #f7f7f7;
-        display: flex; align-items: center; justify-content: center;
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name • Bio Link</title>
+  <!-- Font Awesome for icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      width: 100%; height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f7f7f7;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .container {
+      width: 100%; max-width: 400px;
+      text-align: center;
+      padding: 2rem;
+    }
+    .avatar {
+      width: 120px; height: 120px;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1, p.bio {
+      color: #333;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: .15em solid #333;
+      width: 0;
+    }
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+    p.bio {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+      border-color: #666;
+    }
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px; height: 60px;
+      background: #000;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.5rem;
+      border-radius: 50%;
+      transition: background 0.2s ease;
+    }
+    .links a:hover { background: #333; }
+    .footer {
+      font-size: 0.9rem;
+      color: #444;
+    }
+    .views {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="avatar" src="https://via.placeholder.com/120" alt="Your Avatar">
+    <h1 id="type-name">Your Name</h1>
+    <p class="bio" id="type-bio">Short description or tagline goes here.</p><div class="views">👁️ Views: <span id="view-count">0</span></div>
+
+<div class="links">
+  <a href="https://www.last.fm/user/yourusername" target="_blank" title="Last.fm">
+    <i class="fab fa-lastfm"></i>
+  </a>
+  <a href="https://t.me/yourusername" target="_blank" title="Telegram">
+    <i class="fab fa-telegram-plane"></i>
+  </a>
+  <a href="https://yourdomain.com" target="_blank" title="Website">
+    <i class="fas fa-globe"></i>
+  </a>
+</div>
+
+<div class="footer">&copy; 2025 Your Name</div>
+
+  </div>  <script>
+    // Typewriter effect
+    function typeEffect(el, text, delay = 100) {
+      el.textContent = '';
+      let i = 0;
+      function typing() {
+        if (i < text.length) {
+          el.textContent += text.charAt(i);
+          i++;
+          setTimeout(typing, delay);
+        } else {
+          el.style.borderRight = 'none';
+        }
       }
-      .container {
-        width: 100%; max-width: 400px;
-        text-align: center;
-        padding: 2rem;
-      }
-      /* Avatar */
-      .avatar {
-        width: 120px; height: 120px;
-        margin: 0 auto 1rem;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 4px solid #fff;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      }
-      /* Name & bio */
-      h1 {
-        font-size: 1.75rem;
-        margin-bottom: 0.25rem;
-        color: #333;
-      }
-      p.bio {
-        font-size: 1rem;
-        color: #666;
-        margin-bottom: 1.5rem;
-      }
-      /* Links */
-      .links {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-      }
-      .links a {
-        display: block;
-        padding: 0.75rem 1rem;
-        background: #000;
-        color: #fff;
-        text-decoration: none;
-        font-weight: 600;
-        border-radius: 0.5rem;
-        transition: background 0.2s ease;
-      }
-      .links a:hover {
-        background: #333;
-      }
-      /* Footer */
-      .footer {
-        margin-top: 2rem;
-        font-size: 0.75rem;
-        color: #aaa;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <!-- Avatar -->
-      <img
-        class="avatar"
-        src="https://via.placeholder.com/120"
-        alt="Your Avatar"
-      />
-      <!-- Name -->
-      <h1>Your Name</h1>
-      <!-- Short bio or tagline -->
-      <p class="bio">Short description or tagline goes here.</p>
-      <!-- Links -->
-      <div class="links">
-        <a href="#" target="_blank">Link #1</a>
-        <a href="#" target="_blank">Link #2</a>
-        <a href="#" target="_blank">Link #3</a>
-        <a href="#" target="_blank">Link #4</a>
-      </div>
-      <!-- Footer / Copyright -->
-      <div class="footer">&copy; 2025 Your Name</div>
-    </div>
-  </body>
-</html> 
+      typing();
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const nameEl = document.getElementById('type-name');
+      const bioEl = document.getElementById('type-bio');
+      typeEffect(nameEl, 'Your Name', 150);
+      setTimeout(() => {
+        typeEffect(bioEl, 'Short description or tagline goes here.', 75);
+      }, 2000);
+
+      // View counter using CountAPI
+      fetch('https://api.countapi.xyz/hit/your-namespace/your-key')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('view-count').textContent = data.value;
+        })
+        .catch(err => console.error('CountAPI error:', err));
+    });
+  </script></body>
+</html>

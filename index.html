@@ -1,1 +1,90 @@
-<h1>hi hi hi hi hi hihi fr</h1>
+<!DOCTYPE html><html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Name • Bio Link</title>
+    <style>
+      /* Reset & base */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body, html {
+        width: 100%; height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: #f7f7f7;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .container {
+        width: 100%; max-width: 400px;
+        text-align: center;
+        padding: 2rem;
+      }
+      /* Avatar */
+      .avatar {
+        width: 120px; height: 120px;
+        margin: 0 auto 1rem;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #fff;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      /* Name & bio */
+      h1 {
+        font-size: 1.75rem;
+        margin-bottom: 0.25rem;
+        color: #333;
+      }
+      p.bio {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 1.5rem;
+      }
+      /* Links */
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .links a {
+        display: block;
+        padding: 0.75rem 1rem;
+        background: #000;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        border-radius: 0.5rem;
+        transition: background 0.2s ease;
+      }
+      .links a:hover {
+        background: #333;
+      }
+      /* Footer */
+      .footer {
+        margin-top: 2rem;
+        font-size: 0.75rem;
+        color: #aaa;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Avatar -->
+      <img
+        class="avatar"
+        src="https://via.placeholder.com/120"
+        alt="Your Avatar"
+      />
+      <!-- Name -->
+      <h1>Your Name</h1>
+      <!-- Short bio or tagline -->
+      <p class="bio">Short description or tagline goes here.</p>
+      <!-- Links -->
+      <div class="links">
+        <a href="#" target="_blank">Link #1</a>
+        <a href="#" target="_blank">Link #2</a>
+        <a href="#" target="_blank">Link #3</a>
+        <a href="#" target="_blank">Link #4</a>
+      </div>
+      <!-- Footer / Copyright -->
+      <div class="footer">&copy; 2025 Your Name</div>
+    </div>
+  </body>
+</html> 

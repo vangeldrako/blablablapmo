@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Serotonin</title>
+  <title>Serotonin • Bio Link</title>
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
       --bg-color: #0a0a0a;
-      --accent: #FF4D4D;
+      --accent: #7B61FF;
       --text: rgba(255,255,255,0.95);
       --glass: rgba(255,255,255,0.05);
     }
@@ -18,7 +18,7 @@
     body, html {
       width: 100%; height: 100%;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(45deg, #1a1a1a 0%, #0a0a0a 100%);
+      background: linear-gradient(45deg, #0f0f0f 0%, #1a1a1a 100%);
       display: flex; align-items: center; justify-content: center;
       color: var(--text);
     }
@@ -41,16 +41,17 @@
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid var(--accent);
-      box-shadow: 0 0 24px rgba(255,77,77,0.3);
-      transition: transform 0.3s ease;
+      box-shadow: 0 0 24px rgba(123,97,255,0.3);
     }
 
     h1 {
       font-size: 2rem;
-      margin-bottom: 0.75rem;
-      background: linear-gradient(45deg, var(--accent) 30%, #FF9D4D 100%);
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, #7B61FF 30%, #61FFCA 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: gradientShift 5s ease infinite;
+      background-size: 200% 200%;
     }
 
     .bio {
@@ -61,6 +62,9 @@
       max-width: 80%;
       margin-left: auto;
       margin-right: auto;
+      overflow: hidden;
+      border-right: 2px solid var(--accent);
+      white-space: nowrap;
     }
 
     .links {
@@ -86,7 +90,7 @@
     .links a:hover {
       background: var(--accent);
       transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(255,77,77,0.3);
+      box-shadow: 0 4px 16px rgba(123,97,255,0.3);
     }
 
     .views {
@@ -104,6 +108,12 @@
       margin-top: 2rem;
     }
 
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     /* Typewriter effect */
     @keyframes typing {
       from { width: 0 }
@@ -114,50 +124,49 @@
       50% { border-color: transparent }
     }
 
-    .typewriter {
-      overflow: hidden;
-      border-right: 2px solid var(--accent);
-      white-space: nowrap;
-      margin: 0 auto;
+    .typing-animation {
       animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <img class="avatar" src="https://via.placeholder.com/120" alt="Broken Avatar">
-    <p class="bio">I code sometimes</p>
+    <img class="avatar" src="https://via.placeholder.com/120" alt="Serotonin">
+    <h1>Serotonin</h1>
+    <p class="bio typing-animation">I code, write and make music in my freetime</p>
     
     <div class="views">
-      👁️ <span id="view-count">0</span> views
+      Views • <span id="view-count">0</span>
     </div>
 
     <div class="links">
-      <a href="last.fm/user/ignosco" target="_blank" title="Last.fm">
+      <a href="https://www.last.fm/user/ignosco" target="_blank" title="Last.fm">
         <i class="fab fa-lastfm"></i>
       </a>
       <a href="https://t.me/vanzhel" target="_blank" title="Telegram">
         <i class="fab fa-telegram"></i>
       </a>
-      <a href="https://juggi.ng/moon" target="_blank" title="Juggi.ng">
-        <i class="fas fa-globe"></i>
+      <a href="https://juggi.ng/moon" target="_blank" title="Website">
+        <i class="fas fa-moon"></i>
       </a>
     </div>
 
-    <div class="footer">&copy; </div>
+    <div class="footer">&copy; 2025 Serotonin</div>
   </div>
 
   <script>
-    // Working view counter
-    const namespace = 'your-bio-page';
-    const key = 'unique-key-123';
+    // Simple view counter (no API key needed)
+    const updateCounter = () => {
+      fetch('https://api.countapi.xyz/hit/serotonin-bio/main')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('view-count').textContent = data.value;
+        })
+        .catch(err => console.error('Error counting views:', err));
+    }
 
-    fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('view-count').textContent = data.value;
-      })
-      .catch(error => console.error('Error:', error));
+    // Initialize
+    document.addEventListener('DOMContentLoaded', updateCounter);
   </script>
 </body>
 </html>

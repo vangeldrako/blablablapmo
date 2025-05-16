@@ -68,6 +68,8 @@
       max-width: 300px;
       text-align: center;
       position: relative;
+      white-space: normal;
+      word-wrap: break-word;
     }
 
     .bio::after {
@@ -154,22 +156,26 @@
       </a>
     </div>
 
-    <div class="footer">&copy; 2024 Serotonin</div>
+    <div class="footer">&copy; 2025 Serotonin</div>
   </div>
 
   <script>
-    // View counter using countapi.xyz (no key needed)
-    fetch('https://api.countapi.xyz/hit/serotonin/bio')
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('view-count').textContent = data.value.toLocaleString();
-      })
-      .catch(error => {
-        console.error('Error fetching views:', error);
-        document.getElementById('view-count').textContent = '1k+';
-      });
+    // View counter using Visitor Badge (working free service)
+    const updateCounter = () => {
+      fetch('https://visitor-badge.laobi.icu/badge?page_id=serotonin.bio')
+        .then(response => response.text())
+        .then(text => {
+          const count = text.match(/<text.*?>(\d+)<\/text>/)[1];
+          document.getElementById('view-count').textContent = count;
+        })
+        .catch(error => {
+          console.error('Error fetching views:', error);
+          document.getElementById('view-count').textContent = '1k+';
+        });
+    }
+    updateCounter();
 
-    // Improved Typewriter effect
+    // Typewriter effect
     const typewriter = document.getElementById('typewriter');
     const text = "I code, write and make music in my freetime";
     let index = 0;
@@ -189,13 +195,13 @@
       if (!isDeleting) {
         index++;
         if (index > text.length) {
-          wait = 2000; // Wait 2 seconds at end
+          wait = 2000;
           isDeleting = true;
         }
       } else {
         index--;
         if (index === 0) {
-          wait = 500; // Wait 0.5 seconds at start
+          wait = 500;
           isDeleting = false;
         }
       }
@@ -204,7 +210,6 @@
       setTimeout(typeText, speed);
     }
 
-    // Start animation
     typeText();
   </script>
 </body>
